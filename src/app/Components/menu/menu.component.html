@@ -1,0 +1,33 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+      [attr.role]="(isWeb$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isWeb$ | async) ? 'over' : 'side'"
+      [opened]="(isWeb$ | async) === false">
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item href="/clientes"> <mat-icon class="icon1">shopping_bag</mat-icon>  Clientes</a>
+      <a mat-list-item href="/usuarios"> <mat-icon class="icon1">perm_identity</mat-icon>  Usuarios</a>
+      <a mat-list-item href="/facturas"> <mat-icon class="icon1">fact_check</mat-icon>  Facturas</a>
+      <a mat-list-item href="/productos"> <mat-icon class="icon1">store_mall_directory</mat-icon>  Productos</a>
+      <a mat-list-item href="/inventarios"> <mat-icon class="icon1">account_balance</mat-icon>  Inventarios</a>
+      <a mat-list-item href="/devoluciones"> <mat-icon class="icon1">assignment_return</mat-icon>  Devoluciones</a>
+      <a mat-list-item href="/tabla"> <mat-icon class="icon1"> table_chart</mat-icon> Tabla</a>
+      <a mat-list-item href="/formulario"> <mat-icon class="icon1"> assignment</mat-icon>  Formulario</a>
+      <a mat-list-item href="/personas"> <mat-icon class="icon1"> assignment</mat-icon>  Personas</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="warn">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isWeb$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>San Miguel</span>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
