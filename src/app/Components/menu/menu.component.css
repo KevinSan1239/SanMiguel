@@ -17,9 +17,17 @@
 }
 
 .icon1{
-position: relative;
-top: 4px;
-right: 2px;
-}
-
-
+  position: relative;
+  top: 4px;
+  right: 2px;
+  }
+  
+.avatar{
+  position: absolute;
+  left: 1370px;
+  top: 7px;
+  }
+  
+  *{
+    cursor: pointer;
+  }

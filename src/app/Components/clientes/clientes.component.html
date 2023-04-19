@@ -1,1 +1,270 @@
-<p>clientes works!</p>
+
+  <div class="text" [ngStyle]="{'display': !isNull ? '' : 'none' }">
+    <h2>Sin datos en la base de datos por favor hablar con el administrador.</h2>
+  </div>
+
+<div class="container"  [ngStyle]="{'display': isNull ? '' : 'none' }">
+
+
+  <div class="m-5"></div>
+
+   <div  style="position: absolute;top: 9%;margin: 0;left: 7%;">
+     
+  <mat-form-field style="width: 1200px;">
+    <mat-label>Filtro</mat-label>
+    <input  matInput (keyup)="applyFilter($event)" placeholder="Filtros" #input>
+  </mat-form-field> 
+   </div>
+
+    <small>&nbsp;</small>
+
+  <div class="mx-auto w-100" >
+    <div class="card-body">
+
+
+      <table  mat-table id="full-width-table" matSort aria-label="Elements" [dataSource]="data">
+
+        
+        
+        <div *ngFor="let col of displayedColumns">
+          
+          <ng-container *ngIf="col!='Acciones';else templateName" matColumnDef="{{col}}">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ col }}</th>
+          <td mat-cell *matCellDef="let element">{{element[col]}}</td>  
+          </ng-container>
+        
+          <ng-template #templateName>
+            <ng-container *ngIf="col=='Acciones'" matColumnDef="{{col}}">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header id="th" >Acciones</th>
+             <td mat-cell *matCellDef="let elements;">
+               <button (click)="updateclick(elements.dni)" type="button" class="btn"><mat-icon>remove_red_eye</mat-icon> </button>
+               <button (click)="getIdentity(elements.dni)" type="button" class="btn"><mat-icon>cancel</mat-icon> </button>
+     
+             </td>
+               </ng-container>
+          </ng-template>
+        
+        </div>
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <!-- Row shown when there is no matching data. -->
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell" colspan="4">No coinciden datos en la tabla con el siguiente texto: <strong>"{{input.value}}"</strong></td>
+  </tr>
+      </table>
+    
+      <mat-paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons></mat-paginator>
+
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="mx-auto w-75">
+    <div class="card-header">
+      <a class="btn btn-success w-100" data-toggle="collapse" href="#multiCollapseExample0" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Insertar Cliente.</a>
+    </div>
+    <div class="card-body">
+    
+      <div class="row">
+        <div class="col">
+          <div class="collapse multi-collapse" id="multiCollapseExample0">
+            <div class="card card-body">
+              <form [formGroup]="formModificar" (ngSubmit)="formdataGETPOST(formModificar)" >
+                
+                <mat-grid-list cols="2" rowHeight="80px" gutterSize="12px">
+                 
+                  <mat-grid-tile> 
+                    <mat-form-field class="example-full-width">
+                      <mat-label> Nombre </mat-label>
+                      <input matInput placeholder="Nombre" formControlName="nombre">
+                    </mat-form-field>
+                   </mat-grid-tile>
+                  <mat-grid-tile>
+                    <mat-form-field class="example-full-width">
+                      <mat-label> Apellido </mat-label>
+                      <input matInput placeholder="Apellido" formControlName="apellidos">
+                    </mat-form-field>
+                  </mat-grid-tile>
+                  <mat-grid-tile>
+                    <mat-form-field class="example-full-width">
+                      <mat-label> Correo </mat-label>
+                      <input matInput placeholder="Correo" formControlName="correo">
+                    </mat-form-field>
+                  </mat-grid-tile>
+                  <mat-grid-tile> 
+                    <mat-form-field class="example-full-width">
+                      <mat-label> Rol </mat-label>
+                      <input matInput placeholder="Rol" value="Cliente"  readonly >
+                    </mat-form-field>
+                  </mat-grid-tile>
+                  <mat-grid-tile>
+                    <mat-form-field class="example-full-width">
+                      <mat-label> Genero </mat-label>
+                      <input matInput placeholder="Correo" formControlName="genero">
+                    </mat-form-field>
+                  </mat-grid-tile>
+  
+                  <mat-grid-tile>
+                    <mat-form-field class="example-full-width">
+                      <mat-label> Cedula </mat-label>
+                      <input matInput placeholder="Correo" formControlName="dni">
+                    </mat-form-field>
+                  </mat-grid-tile>
+  
+                  <mat-grid-tile>
+                    <mat-form-field class="example-full-width">
+                      <mat-label> Ciudad </mat-label>
+                      <input matInput placeholder="Correo" formControlName="ciudad">
+                    </mat-form-field>
+                  </mat-grid-tile>
+  
+                  <mat-grid-tile>
+                    <mat-form-field class="example-full-width">
+                      <mat-label> Direccion </mat-label>
+                      <input matInput placeholder="Correo" formControlName="direccion">
+                    </mat-form-field>
+                  </mat-grid-tile>
+  
+  
+                </mat-grid-list>
+                <br>
+                <mat-grid-list cols="1" rowHeight="50px" gutterSize="50px">
+                  <mat-grid-tile class=""> 
+                    <mat-form-field class="example-full-width" hidden="true">
+                      <mat-label> Id </mat-label>
+                      <input matInput placeholder="Identificación" type="number"  formControlName="idCliente">
+                    </mat-form-field>
+                      <button class="form-control w-75 btn btn-success btn-sm">Insertar</button>
+                   </mat-grid-tile>
+                </mat-grid-list>
+                </form>
+  
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="mx-auto w-75">
+    <div class="card-header">
+      <a class="btn btn-secondary w-100" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Modificar Cliente.</a>
+    </div>
+    <div class="card-body">
+        
+
+      <div class="row">
+        <div class="col">
+          <div class="collapse multi-collapse" id="multiCollapseExample1">
+            <div class="card card-body">
+
+              <form [formGroup]="formModificar" (ngSubmit)="formdataGETUPDATE(formModificar)" >
+                
+              <mat-grid-list cols="2" rowHeight="80px" gutterSize="12px">
+               
+                <mat-grid-tile> 
+                  <mat-form-field class="example-full-width">
+                    <mat-label> Nombre </mat-label>
+                    <input matInput placeholder="Nombre" formControlName="nombre">
+                  </mat-form-field>
+                 </mat-grid-tile>
+                <mat-grid-tile>
+                  <mat-form-field class="example-full-width">
+                    <mat-label> Apellido </mat-label>
+                    <input matInput placeholder="Apellido" formControlName="apellidos">
+                  </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                  <mat-form-field class="example-full-width">
+                    <mat-label> Correo </mat-label>
+                    <input matInput placeholder="Correo" formControlName="correo">
+                  </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile> 
+                  <mat-form-field class="example-full-width">
+                    <mat-label> Rol </mat-label>
+                    <input matInput placeholder="Rol" formControlName="rol" readonly>
+                  </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                  <mat-form-field class="example-full-width">
+                    <mat-label> Genero </mat-label>
+                    <input matInput placeholder="Correo" formControlName="genero">
+                  </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+                  <mat-form-field class="example-full-width">
+                    <mat-label> Cedula </mat-label>
+                    <input matInput placeholder="Correo" formControlName="dni">
+                  </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+                  <mat-form-field class="example-full-width">
+                    <mat-label> Ciudad </mat-label>
+                    <input matInput placeholder="Correo" formControlName="ciudad">
+                  </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+                  <mat-form-field class="example-full-width">
+                    <mat-label> Direccion </mat-label>
+                    <input matInput placeholder="Correo" formControlName="direccion">
+                  </mat-form-field>
+                </mat-grid-tile>
+
+
+              </mat-grid-list>
+              <br>
+              <mat-grid-list cols="1" rowHeight="50px" gutterSize="50px">
+                <mat-grid-tile class=""> 
+                  <mat-form-field class="example-full-width" hidden="true">
+                    <mat-label> Id </mat-label>
+                    <input matInput placeholder="Identificación" type="number"  formControlName="idCliente">
+                  </mat-form-field>
+                    <button class="form-control w-75 btn btn-primary btn-sm">Modificar</button>
+                 </mat-grid-tile>
+              </mat-grid-list>
+              </form>
+
+
+              
+          </div>
+        </div>
+      </div>
+  </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="mx-auto w-75">
+    <div class="card-header">
+      <a class="btn btn-dark w-100" data-toggle="collapse" href="#multiCollapseExample2" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Eliminar cliente.</a>
+    </div>
+    <div class="card-body">
+    
+      <div class="row">
+        <div class="col">
+          <div class="collapse multi-collapse" id="multiCollapseExample2">
+            <div class="card card-body">
+              <div class="mx-auto w-75" style="position:relative;left: 80px;">
+                <input type="text" id="txt_delete" class="form-control w-75"    placeholder="Id Del Elemento cliente" #txt_delete value="{{setCliente}}" readonly>
+                <br>
+                  <button class="btn btn-danger w-75" (click)="deleteClick(txt_delete.value)">Eliminar cliente.</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  </div>
+</div>

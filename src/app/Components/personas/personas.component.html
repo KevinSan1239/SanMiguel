@@ -1,1 +1,16 @@
-<p>personas works!</p>
+<table style="right: 0;">
+     <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+        </tr>
+     </thead>
+
+     <tbody *ngFor="let item of data;index as index">
+        <tr>
+            <td>{{data[index].nombre}}</td>
+            <td>{{data[index].apellidos}}</td>
+        </tr>
+
+     </tbody>
+</table>

@@ -1,0 +1,57 @@
+table{
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+mat-icon{
+  position: relative;
+  left: -1px; 
+  top: 2px; 
+  padding: -30px;
+}
+
+#txt_delete{
+  -webkit-filter:blur(4px);
+  text-align: center;
+  font-weight: bold;
+  }
+   
+  #txt_delete:focus{
+  -webkit-filter:none;
+  }
+
+  mat-grid-tile {
+    background: transparent;
+  }
+
+  .example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+
+  .text{
+    display: inline-block;
+    position: relative;
+    left: 480px;
+    top: 10px;
+  }
+
+   h2{
+    overflow: hidden;
+    border-right: .100em solid #fff;
+    white-space: nowrap;
+    animation: typing 2s infinite alternate steps(28);
+  }
+
+  @keyframes typing {
+    from{
+      width: 0;
+    }
+    to{
+      width:108%;
+    }
+  }

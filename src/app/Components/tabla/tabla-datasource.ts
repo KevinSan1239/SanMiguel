@@ -44,6 +44,8 @@ export class TablaDataSource extends DataSource<TablaItem> {
   paginator: MatPaginator | undefined;
   sort: MatSort | undefined;
 
+  
+
   constructor() {
     super();
   }
